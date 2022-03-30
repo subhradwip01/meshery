@@ -280,7 +280,7 @@ class MesherySettings extends React.Component {
             <div className={classes.link}>
               <FontAwesomeIcon icon={faArrowLeft} transform="grow-4" fixedWidth />
               {' '}
-              You are all set to manage service meshes
+              You are all set to manage cloud native infrastructure
             </div>
           </Link>
         </div>
@@ -312,7 +312,7 @@ class MesherySettings extends React.Component {
                 icon={
                   <FontAwesomeIcon icon={faMendeley} transform={mainIconScale} />
                 }
-                label="Service Meshes"
+                label="Adapters"
                 data-cy="tabServiceMeshes"
               />
             </Tooltip>

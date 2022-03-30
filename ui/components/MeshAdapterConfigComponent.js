@@ -265,7 +265,7 @@ class MeshAdapterConfigComponent extends React.Component {
                 options={availableAdapters}
                 value={meshLocationURL}
                 // placeholder={'Mesh Adapter URL'}
-                label="Mesh Adapter URL"
+                label="Meshery Adapter URL"
                 error={meshLocationURLError}
               />
             </Grid>

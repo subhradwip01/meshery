@@ -39,6 +39,7 @@ import { withSnackbar } from "notistack";
 import AddIcon from "@material-ui/icons/Add";
 import DeleteIcon from "@material-ui/icons/Delete";
 import PlayIcon from "@material-ui/icons/PlayArrow";
+import ValidateIcon from "../public/static/img/checklist_svg.js";
 // import { updateSMIResults } from '../lib/store';
 import { updateProgress } from "../lib/store";
 import dataFetch from "../lib/data-fetch";
@@ -56,11 +57,15 @@ import MesheryMetrics from "./MesheryMetrics"
 const styles = (theme) => ({
   root : { backgroundColor : "#eaeff1", },
   buttons : { width : "100%", },
-  button : { marginTop : theme.spacing(3),
-    marginLeft : theme.spacing(1), },
+  button : {
+    marginTop : theme.spacing(3),
+    marginLeft : theme.spacing(1),
+  },
   margin : { margin : theme.spacing(1), },
-  alreadyConfigured : { textAlign : "center",
-    padding : theme.spacing(20), },
+  alreadyConfigured : {
+    textAlign : "center",
+    padding : theme.spacing(20),
+  },
   chip : {
     height : "50px",
     fontSize : "15px",
@@ -68,25 +73,35 @@ const styles = (theme) => ({
     top : theme.spacing(0.5),
     [theme.breakpoints.down("md")] : { fontSize : "12px", },
   },
-  colorSwitchBase : { color : blue[300],
-    "&$colorChecked" : { color : blue[500],
-      "& + $colorBar" : { backgroundColor : blue[500], }, }, },
+  colorSwitchBase : {
+    color : blue[300],
+    "&$colorChecked" : {
+      color : blue[500],
+      "& + $colorBar" : { backgroundColor : blue[500], },
+    },
+  },
   colorBar : {},
   colorChecked : {},
-  uploadButton : { margin : theme.spacing(1),
-    marginTop : theme.spacing(3), },
+  uploadButton : {
+    margin : theme.spacing(1),
+    marginTop : theme.spacing(3),
+  },
   fileLabel : { width : "100%", },
   editorContainer : { width : "100%", },
   deleteLabel : { paddingRight : theme.spacing(2), },
   alignRight : { textAlign : "right", },
-  alignLeft : { textAlign : "left",
-    marginLeft : theme.spacing(1), },
+  alignLeft : {
+    textAlign : "left",
+    marginLeft : theme.spacing(1),
+  },
   padLeft : { paddingLeft : theme.spacing(0.25), },
   padRight : { paddingRight : theme.spacing(0.25), },
   deleteRight : { float : "right", },
-  expTitleIcon : { width : theme.spacing(3),
+  expTitleIcon : {
+    width : theme.spacing(3),
     display : "inline",
-    verticalAlign : "middle", },
+    verticalAlign : "middle",
+  },
   expIstioTitleIcon : {
     width : theme.spacing(2),
     display : "inline",
@@ -94,24 +109,38 @@ const styles = (theme) => ({
     marginLeft : theme.spacing(0.5),
     marginRight : theme.spacing(0.5),
   },
-  expTitle : { display : "inline",
-    verticalAlign : "middle", },
+  expTitle : {
+    display : "inline",
+    verticalAlign : "middle",
+  },
   icon : { width : theme.spacing(2.5), },
-  tableHeader : { fontWeight : "bolder",
-    fontSize : 18, },
-  secondaryTable : { borderRadius : 10,
-    backgroundColor : "#f7f7f7", },
-  paneSection : { backgroundColor : "#fff",
+  tableHeader : {
+    fontWeight : "bolder",
+    fontSize : 18,
+  },
+  secondaryTable : {
+    borderRadius : 10,
+    backgroundColor : "#f7f7f7",
+  },
+  paneSection : {
+    backgroundColor : "#fff",
     padding : theme.spacing(3),
-    borderRadius : 4, },
-  chipNamespace : { gap : '2rem',
-    margin : "0px", },
+    borderRadius : 4,
+  },
+  chipNamespace : {
+    gap : '2rem',
+    margin : "0px",
+  },
   cardMesh : { margin : "-8px 0px", },
-  inputContainer : { flex : '1',
-    minWidth : '250px' },
-  card : { height : '100%',
+  inputContainer : {
+    flex : '1',
+    minWidth : '250px'
+  },
+  card : {
+    height : '100%',
     display : 'flex',
-    flexDirection : 'column' }
+    flexDirection : 'column'
+  }
 });
 
 class MesheryAdapterPlayComponent extends React.Component {
@@ -131,8 +160,10 @@ class MesheryAdapterPlayComponent extends React.Component {
     if (adapter && adapter.ops) {
       // NOTE: this will have to updated to match the categories
       [0, 1, 2, 3, 4].forEach((i) => {
-        menuState[i] = { add : false,
-          delete : false, };
+        menuState[i] = {
+          add : false,
+          delete : false,
+        };
       });
     }
 
@@ -148,8 +179,10 @@ class MesheryAdapterPlayComponent extends React.Component {
 
       selectionError : false,
 
-      namespace : { value : "default",
-        label : "default" },
+      namespace : {
+        value : "default",
+        label : "default"
+      },
       namespaceError : false,
 
       customDialogAdd : false,
@@ -186,30 +219,38 @@ class MesheryAdapterPlayComponent extends React.Component {
     subscribeAddonStatusEvents(self.setAddonsState, variables)
 
     fetchAvailableAddons(variables)
-      .subscribe({ next : res => {
-        self.setAddonsState(res)
-      },
-      error : (err) => console.log("error at addon fetch: " + err), })
+      .subscribe({
+        next : res => {
+          self.setAddonsState(res)
+        },
+        error : (err) => console.log("error at addon fetch: " + err),
+      })
     fetchAvailableNamespaces()
-      .subscribe({ next : res => {
-        let namespaces = []
-        res?.namespaces?.map(ns => {
-          namespaces.push(
-            { value : ns?.namespace,
-              label : ns?.namespace }
-          )
-        })
-        if (namespaces.length === 0) {
-          namespaces.push({ value : "default",
-            label : "default" })
-        }
-        namespaces.sort((a, b) => (
-          a.value > b.value ? 1
-            : -1
-        ))
-        self.setState({ namespaceList : namespaces })
-      },
-      error : (err) => console.log("error at namespace fetch: " + err), })
+      .subscribe({
+        next : res => {
+          let namespaces = []
+          res?.namespaces?.map(ns => {
+            namespaces.push(
+              {
+                value : ns?.namespace,
+                label : ns?.namespace
+              }
+            )
+          })
+          if (namespaces.length === 0) {
+            namespaces.push({
+              value : "default",
+              label : "default"
+            })
+          }
+          namespaces.sort((a, b) => (
+            a.value > b.value ? 1
+              : -1
+          ))
+          self.setState({ namespaceList : namespaces })
+        },
+        error : (err) => console.log("error at namespace fetch: " + err),
+      })
   }
 
   mapAdapterNameToMeshName(name) {
@@ -369,13 +410,15 @@ class MesheryAdapterPlayComponent extends React.Component {
         self.setState({ menuState, [dlg] : false });
 
         if (typeof result !== "undefined") {
-          self.props.enqueueSnackbar("Operation executing...", { variant : "info",
+          self.props.enqueueSnackbar("Operation executing...", {
+            variant : "info",
             autoHideDuration : 2000,
             action : (key) => (
               <IconButton key="close" aria-label="Close" color="inherit" onClick={() => self.props.closeSnackbar(key)}>
                 <CloseIcon />
               </IconButton>
-            ), });
+            ),
+          });
         }
       },
       self.handleError(cat, deleteOp)
@@ -387,18 +430,22 @@ class MesheryAdapterPlayComponent extends React.Component {
     const self = this;
     dataFetch(
       `/api/system/adapters?adapter=${encodeURIComponent(adapterLoc)}`,
-      { credentials : "same-origin",
-        credentials : "include", },
+      {
+        credentials : "same-origin",
+        credentials : "include",
+      },
       (result) => {
         this.props.updateProgress({ showProgress : false });
         if (typeof result !== "undefined") {
-          this.props.enqueueSnackbar("Adapter successfully pinged!", { variant : "success",
+          this.props.enqueueSnackbar("Adapter successfully pinged!", {
+            variant : "success",
             autoHideDuration : 2000,
             action : (key) => (
               <IconButton key="close" aria-label="Close" color="inherit" onClick={() => self.props.closeSnackbar(key)}>
                 <CloseIcon />
               </IconButton>
-            ), });
+            ),
+          });
         }
       },
       self.handleError("Could not ping adapter.")
@@ -420,9 +467,11 @@ class MesheryAdapterPlayComponent extends React.Component {
 
     dataFetch(
       `/api/smi/results${query}`,
-      { credentials : "same-origin",
+      {
+        credentials : "same-origin",
         method : "GET",
-        credentials : "include", },
+        credentials : "include",
+      },
       (result) => {
         if (typeof result !== "undefined" && result.results) {
           const results = result.results.filter((val) => val.mesh_name.toLowerCase() == adapterName.toLowerCase());
@@ -458,13 +507,15 @@ class MesheryAdapterPlayComponent extends React.Component {
         self.setState({ menuState, [dlg] : false });
       }
       self.props.updateProgress({ showProgress : false });
-      self.props.enqueueSnackbar(`Operation submission failed: ${error}`, { variant : "error",
+      self.props.enqueueSnackbar(`Operation submission failed: ${error}`, {
+        variant : "error",
         action : (key) => (
           <IconButton key="close" aria-label="Close" color="inherit" onClick={() => self.props.closeSnackbar(key)}>
             <CloseIcon />
           </IconButton>
         ),
-        autoHideDuration : 8000, });
+        autoHideDuration : 8000,
+      });
     };
   };
 
@@ -522,7 +573,8 @@ class MesheryAdapterPlayComponent extends React.Component {
     const { user, classes } = self.props;
 
     const smi_columns = [
-      { name : "ID",
+      {
+        name : "ID",
         label : "ID",
         options : {
           filter : true,
@@ -540,8 +592,10 @@ class MesheryAdapterPlayComponent extends React.Component {
               <div>{value.slice(0, 5) + "..."}</div>
             </Tooltip>
           ),
-        }, },
-      { name : "Date",
+        },
+      },
+      {
+        name : "Date",
         label : "Date",
         options : {
           filter : true,
@@ -555,8 +609,10 @@ class MesheryAdapterPlayComponent extends React.Component {
             );
           },
           customBodyRender : (value) => <Moment format="LLLL">{value}</Moment>,
-        }, },
-      { name : "Service Mesh",
+        },
+      },
+      {
+        name : "Service Mesh",
         label : "Service Mesh",
         options : {
           filter : true,
@@ -569,8 +625,10 @@ class MesheryAdapterPlayComponent extends React.Component {
               </TableCell>
             );
           },
-        }, },
-      { name : "Service Mesh Version",
+        },
+      },
+      {
+        name : "Service Mesh Version",
         label : "Service Mesh Version",
         options : {
           filter : true,
@@ -583,8 +641,10 @@ class MesheryAdapterPlayComponent extends React.Component {
               </TableCell>
             );
           },
-        }, },
-      { name : "% Passed",
+        },
+      },
+      {
+        name : "% Passed",
         label : "% Passed",
         options : {
           filter : true,
@@ -597,8 +657,10 @@ class MesheryAdapterPlayComponent extends React.Component {
               </TableCell>
             );
           },
-        }, },
-      { name : "status",
+        },
+      },
+      {
+        name : "status",
         label : "Status",
         options : {
           filter : true,
@@ -611,7 +673,8 @@ class MesheryAdapterPlayComponent extends React.Component {
               </TableCell>
             );
           },
-        }, },
+        },
+      },
     ];
 
     const smi_options = {
@@ -880,31 +943,37 @@ class MesheryAdapterPlayComponent extends React.Component {
         : [];
     let content;
     let description;
+    let button;
     switch (cat) {
       case 0:
-        content = "Manage Service Mesh Lifecycle";
-        description = "Deploy a service mesh or SMI adapter on your cluster.";
+        content = "Lifecycle";
+        description = "Deploy or remove a service mesh.";
+        button = <AddIcon />;
         break;
 
       case 1:
-        content = "Manage Sample Application Lifecycle";
-        description = "Deploy sample applications on/off the service mesh.";
+        content = "Sample Apps";
+        description = "Deploy or remove sample applications.";
+        button = <AddIcon />;
         break;
 
       case 2:
-        content = "Apply Service Mesh Configuration";
-        description = "Configure your service mesh using some pre-defined options.";
+        content = "Apply Standard Configuration";
+        description = "Configure your service mesh using common options.";
         selectedAdapterOps = selectedAdapterOps.filter((ops) => !ops.value.startsWith("Add-on:"));
+        button = <AddIcon />;
         break;
 
       case 3:
-        content = "Validate Service Mesh Configuration";
-        description = "Validate your service mesh configuration against best practices.";
+        content = "Validate Configuration";
+        description = "Verify your service mesh configuration against best practices and standards.";
+        button = <ValidateIcon />;
         break;
 
       case 4:
         content = "Apply Custom Configuration";
         description = "Customize the configuration of your service mesh.";
+        button = <PlayIcon />;
         break;
     }
     return (
@@ -916,9 +985,7 @@ class MesheryAdapterPlayComponent extends React.Component {
             ref={(ch) => (this.addIconEles[cat] = ch)}
             onClick={this.addDelHandleClick(cat, false)}
           >
-            {cat !== 4
-              ? <AddIcon />
-              : <PlayIcon />}
+            {button}
           </IconButton>
           {cat !== 4 && this.generateMenu(cat, false, selectedAdapterOps)}
           {cat === 4 && this.generateYAMLEditor(cat, false)}
@@ -964,7 +1031,7 @@ class MesheryAdapterPlayComponent extends React.Component {
     const self = this.state;
     return (
       <FormControl component="fieldset" style={{ padding : "1rem" }}>
-        <FormLabel component="legend">Customize Addons</FormLabel>
+        <FormLabel component="legend">Manage Add-ons</FormLabel>
         <FormGroup>
           {selectedAdapterOps
             .map((ops) => ({ ...ops, value : ops.value.replace("Add-on:", "") }))
@@ -1121,8 +1188,10 @@ class MesheryAdapterPlayComponent extends React.Component {
   }
 }
 
-MesheryAdapterPlayComponent.propTypes = { classes : PropTypes.object.isRequired,
-  adapter : PropTypes.object.isRequired, };
+MesheryAdapterPlayComponent.propTypes = {
+  classes : PropTypes.object.isRequired,
+  adapter : PropTypes.object.isRequired,
+};
 
 // const mapStateToProps = (state) => {
 //   const smi_result = state.get('smi_result').toJS();
@@ -1133,7 +1202,8 @@ const mapStateToProps = (st) => {
   return { grafana : { ...grafana, ts : new Date(grafana.ts) } };
 };
 
-const mapDispatchToProps = (dispatch) => ({ updateProgress : bindActionCreators(updateProgress, dispatch),
+const mapDispatchToProps = (dispatch) => ({
+  updateProgress : bindActionCreators(updateProgress, dispatch),
   // updateSMIResults: bindActionCreators(updateSMIResults, dispatch),
 });
 

@@ -75,8 +75,8 @@ function Mesh() {
       <NoSsr>
         <div className={classes.wrapper}>
           <Container className={classes.container}>
-            <Typography className={classes.notConfigured} variant="h6">
-                Adapter Unavailable
+            <Typography style={{ fontSize : "1.5rem", marginBottom : "2rem" }} align="center" color="textSecondary">
+              Adapter Unavailable
             </Typography>
             <Button
               variant="contained"
