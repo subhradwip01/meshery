@@ -44,7 +44,9 @@ const useStyles = makeStyles((theme) => ({
   },
   container : {
     textAlign : "center",
-    transform : "translateY(-20%)"
+    transform : "translateY(-20%)",
+    backgroundColor : "#FFFFFF",
+    padding : theme.spacing(10)
   },
   wrapper : {
     display : "flex",
