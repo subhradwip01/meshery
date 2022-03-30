@@ -38,9 +38,9 @@ function capitalize(string) {
 }
 
 const useStyles = makeStyles((theme) => ({
-  alreadyConfigured : {
+  notConfigured : {
     textAlign : "center",
-    padding : theme.spacing(20),
+    marginBottom : theme.spacing(5),
   },
   container : {
     textAlign : "center",
@@ -73,6 +73,9 @@ function Mesh() {
       <NoSsr>
         <div className={classes.wrapper}>
           <Container className={classes.container}>
+            <Typography className={classes.notConfigured} variant="h6">
+                Adapter Unavailable
+            </Typography>
             <Button
               variant="contained"
               color="primary"
@@ -81,14 +84,8 @@ function Mesh() {
               className={classes.btn}
             >
               <SettingsIcon className={classes.icon} />
-              Configure Settings
+              Configure Adapters
             </Button>
-            <Typography variant="h6">
-              Broken Adapter
-            </Typography>
-            <Typography variant="subtitle">
-              Your Adapter is not available
-            </Typography>
           </Container>
         </div>
       </NoSsr>
